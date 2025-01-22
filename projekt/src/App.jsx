@@ -1,12 +1,20 @@
+<<<<<<< Updated upstream
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+=======
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './Login';
+import Home from './Home';
+>>>>>>> Stashed changes
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+<<<<<<< Updated upstream
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -30,6 +38,19 @@ function App() {
       </p>
     </>
   )
+=======
+    <div className="App">
+    <Router>
+      <Routes>
+        {/* Default route renders Login.jsx */}
+        <Route path="/" element={<Login />} />
+        {/* Home route renders Home.jsx */}
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </Router>
+    </div>
+  );
+>>>>>>> Stashed changes
 }
 
 export default App
