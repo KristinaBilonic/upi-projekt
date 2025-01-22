@@ -12,7 +12,13 @@
   "dependencies": {
     "react": "^18.3.1",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "react-dom": "^18.3.1"
+=======
+    "react-datepicker": "^7.6.0",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.3"
+>>>>>>> Stashed changes
 =======
     "react-datepicker": "^7.6.0",
     "react-dom": "^18.3.1",
