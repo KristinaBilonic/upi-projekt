@@ -1,19 +1,12 @@
+
 napravila san bazu na mongodb-u, modele, rute samo za korisnika i server al nisan dodavala podatke u bazu.
 testirala sve metode preko postmana.
 za sad je napravljeno jedino da registracija i prijava funkcioniraju, kasnije ću napravit ostalo.
 za pokretanje potrebno:
 
-	DVA TERMINALA OBAVEZNO (prvo za 	[-npm run dev]	i za 	[node server.js])
-
-	Prvi terminal:
 	cd projekt
-	npm install
-	npm run dev
+	cd install
 
-	Drugi terminal:
-	za pokrenit server i spojit se na bazu:  cd projekt
-											 cd backend
-											 node server.js
 
 extra info (višemanje nebitno)
 svi dodatni paketi koje san instalirala (ne treba ponovo instalirat(jedino ako je package-lock bia izbrisan))

@@ -1,78 +1,45 @@
 import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function Login() {
     //kod koji je bitan za komponentu kad je pokrenuta aplikacija dolazi unutar funkcije
-    const navigate = useNavigate();
 
-    const [provjera, setProvjera] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-
-    const loginAction = async (event) => {
+    const loginAction = (event) => {
         event.preventDefault(); // Sprječavanje standard. ponašanja forme
-        setError(''); // Brisanje prethodne poruke o grešci
 
-        try {
-            const response = await fetch('http://localhost:5000/korisnici/prijava', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    sifra: password // Ovo je lozinka koja je unesena u formu i poslana na server(backend da vidi jel valja)
-                })
-            });
+        // Dohvaćanje forme i elementa za prikaz greške
+        //const loginForm = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
 
-            const data = await response.json();
+        // Dohvaćanje podataka iz forme
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
 
-            if (!response.ok) {
-                throw new Error(data.error || 'Login failed');
-            }
-
-            // Spremanje tokena i korisničkih podataka u lokalno pohranu
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
-
-            // Prikaz poruke o uspješnoj prijavi
-            alert('Successfully logged in!');
-            navigate('/home');
-            // Opcionalno: preusmjeravanje na drugu stranicu ili nazad na početnu al ovo ne radi jer nemamo dashboard
-            // window.location.href = '/dashboard';
-            
-        } catch (err) {
-            setError(err.message || 'An error occurred during login');
+        // Provjera kredencijala (zamjena za poziv API-ja)
+        if (username === 'admin' && password === 'password') {
+            // Uspješna prijava, možete preusmjeriti korisnika na drugu stranicu
+            //window.location.href = 'dashboard.html';
+            alert('Prijavili ste se...');
+        } else {
+            // Neuspješna prijava, prikaz poruke greške
+            errorMessage.textContent = 'Invalid username or password.';
         }
-        
     };
-    //onClick={handleLogin} za botun (na kraju netriba al neka stoji za ostale stvari ako zatriba)
+
     //JSX - Javascript XML notation
     return (
         <div className="login-container">
             <h1>Login</h1>
             <form id="login-form" onSubmit={loginAction}>
                 <label>
-                    Email:
-                    <input type="email"
-                    id="email" 
-                    name="email" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    required />
+
+                    Username:
+                    <input type="text" id="username" name="username" required />
                 </label>
                 <label>
                     Password:
-                    <input type="password" 
-                    id="password" 
-                    name="password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required />
+                    <input type="password" id="password" name="password" required />
                 </label>
-                <button type="submit">Login</button> 
+                <button type="submit">Login</button>
             </form>
             <p id="error-message"></p>
         </div>
