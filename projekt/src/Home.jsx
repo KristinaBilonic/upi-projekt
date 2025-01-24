@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Home = () => {
+const Home = ({ setPageTitle }) => {
   const [fromLocation, setFromLocation] = useState('');
   const [fromDate, setFromDate] = useState(null);
   const [toLocation, setToLocation] = useState('');
@@ -15,8 +15,10 @@ const Home = () => {
     console.log('Passengers:', passengers);
   };
 
+  useEffect(() => setPageTitle(''), []);
+
   return (
-    <div>
+    <div className="container">
       <h1>Kupnja autobusnih karata</h1>
       <div>
         <label htmlFor="fromLocation">Od:</label>

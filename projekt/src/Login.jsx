@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Login() {
+function Login({ setLoading }) {
     //kod koji je bitan za komponentu kad je pokrenuta aplikacija dolazi unutar funkcije
 
     const loginAction = (event) => {
@@ -17,8 +17,7 @@ function Login() {
         // Provjera kredencijala (zamjena za poziv API-ja)
         if (username === 'admin' && password === 'password') {
             // Uspješna prijava, možete preusmjeriti korisnika na drugu stranicu
-            //window.location.href = 'dashboard.html';
-            alert('Prijavili ste se...');
+            location.href = '/home';
         } else {
             // Neuspješna prijava, prikaz poruke greške
             errorMessage.textContent = 'Invalid username or password.';
