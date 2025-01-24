@@ -16,6 +16,9 @@ function App() {
           <Route path="/" element={<Login />} />
           {/* Home route renders Home.jsx */}
           <Route path="/home" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/jedansmjer" element={<JedanSmjer />} />
+          <Route path="/povratno" element={<Povratno />} />
         </Routes>
       </Router>
     </div>
