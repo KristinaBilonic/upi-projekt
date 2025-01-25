@@ -1,4 +1,6 @@
 import './App.css';
+import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 import SignUp from './signup';
@@ -9,7 +11,14 @@ import Povratno from './povratno';
 function App() {
   return (
     <div className="App">
-      <Login></Login>
+      <Router>
+      <Routes>
+        {/* Default route renders Login.jsx */}
+        <Route path="/" element={<Login />} />
+        {/* Home route renders Home.jsx */}
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </Router>
     </div>
   );
 }
