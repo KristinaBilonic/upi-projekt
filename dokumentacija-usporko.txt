@@ -1,3 +1,9 @@
+Dana 24.01.2025. Marijana dodala ekrane (8):  narudzba, pregledPrijeKupnje, ucitavanje, placeno, nijePlaceno, karta, profil, povijestKupnji
+				 Dodala navigaciju (hodogram) i rute za sve trenutne ekrane
+
+Dana 20.01.2025. Marijana dodala naslovnu stranicu
+
+Dana 14.01.2025. Marijana dodala login stranicu
 
 napravila san bazu na mongodb-u, modele, rute samo za korisnika i server al nisan dodavala podatke u bazu.
 testirala sve metode preko postmana.
