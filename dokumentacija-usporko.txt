@@ -1,3 +1,7 @@
+Dana 25.01.2025. Dodala konfiguraciju za pokretati frontend projekt preko botuna u VS Codeu (Ctrl + Shift + D):
+				 	- Launch Chrome (u chromeu otvori frontend)
+					- Launch Frontend (pokrene frontend)
+
 Dana 24.01.2025. Marijana dodala ekrane (8):  narudzba, pregledPrijeKupnje, ucitavanje, placeno, nijePlaceno, karta, profil, povijestKupnji
 				 Dodala navigaciju (hodogram) i rute za sve trenutne ekrane
 
