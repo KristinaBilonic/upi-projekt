@@ -5,7 +5,6 @@ function PregledPrijeKupnje({ setLoading }) {
   const handlePayment = () => {
     setLoading(true)
     setTimeout(() => {
-      setLoading(false);
       location.href = '/placeno';
       //location.href = '/nijePlaceno';
     }, 3000);
