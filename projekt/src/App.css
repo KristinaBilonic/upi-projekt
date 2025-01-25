@@ -5,6 +5,38 @@
   text-align: center;
 }
 
+.App > * {
+  width: 800px;
+}
+
+#root > header {
+  display: flex;
+  background-color: #ffffff;
+  min-height: 57px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+}
+
+#root > header > .heading {
+  flex-grow: 2;
+}
+
+#root > header > .heading > h2 {
+  width: calc(100% - 3.2em);
+}
+
+#root > header > button {
+  font-size: x-large;
+  background-color: transparent;
+}
+
+#root > header > button.right {
+  order: 2;
+  font-size: xx-large;
+  padding: 0.2em !important;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

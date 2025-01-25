@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function Login({ setLoading }) {
     //kod koji je bitan za komponentu kad je pokrenuta aplikacija dolazi unutar funkcije
     const navigate = useNavigate();
 
