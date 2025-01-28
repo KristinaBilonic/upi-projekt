@@ -89,7 +89,9 @@ router.get('/polazak/:mjestoPolaskaID',async(req,res)=>{
 router.get('/polazak/:mjestoPolaskaID/datum/:datumPolaska',async(req,res)=>{
     try{
         const {mjestoPolaskaID,datumPolaska}=req.params;
-        const vozniRed=await VozniRed.find({mjesto_polaska:mjestoPolaskaID,datum_polaska:new Date(datumPolaska)})
+        const pocetakDana = new Date(datumPolaska + "T00:00:00.000Z");
+        const krajDana = new Date(datumPolaska + "T23:59:59.999Z");
+        const vozniRed=await VozniRed.find({mjesto_polaska:mjestoPolaskaID,datum_polaska: { $gte: pocetakDana, $lt: krajDana }})
             .populate('mjesto_polaska','naziv')
             .populate('mjesto_dolaska','naziv')
             .populate('bus_ID','registracija')
@@ -123,7 +125,9 @@ router.get('/dolazak/:mjestoDolaskaID',async(req,res)=>{
 router.get('/polazak/:mjestoPolaskaID/dolazak/:mjestoDolaskaID/datum/:datumPolaska',async(req,res)=>{
     try{
         const {mjestoPolaskaID,mjestoDolaskaID,datumPolaska}=req.params;
-        const vozniRed=await VozniRed.find({mjesto_polaska:mjestoPolaskaID, mjesto_dolaska:mjestoDolaskaID, datum_polaska:new Date(datumPolaska)})
+        const pocetakDana = new Date(datumPolaska + "T00:00:00.000Z");
+        const krajDana = new Date(datumPolaska + "T23:59:59.999Z");
+        const vozniRed=await VozniRed.find({mjesto_polaska:mjestoPolaskaID, mjesto_dolaska:mjestoDolaskaID, datum_polaska: { $gte: pocetakDana, $lt: krajDana }})
             .populate('mjesto_polaska','naziv')
             .populate('mjesto_dolaska','naziv')
             .populate('bus_ID','registracija')
@@ -135,5 +139,6 @@ router.get('/polazak/:mjestoPolaskaID/dolazak/:mjestoDolaskaID/datum/:datumPolas
         res.status(500).json({error:e.message});
     }
 });
+
 export default router;
 
