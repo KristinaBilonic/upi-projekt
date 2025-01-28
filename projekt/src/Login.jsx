@@ -45,6 +45,8 @@ function Login({ setLoading }) {
             
         } catch (err) {
             setError(err.message || 'An error occurred during login');
+            setError(err);
+            alert(err)
         }
         
     };

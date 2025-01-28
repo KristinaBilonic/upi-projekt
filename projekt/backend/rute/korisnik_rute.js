@@ -6,6 +6,17 @@ import dotenv from 'dotenv';
 dotenv.config();
 const router=express.Router();
 
+
+router.post('/',async(req,res)=>{
+    try{
+        const korisnik=new Korisnik(req.body);
+        await korisnik.save();
+        res.status(201).json(korisnik);
+    }catch(e){
+        res.status(400).json({error:e.message});
+    }
+});
+
 //registracija
 router.post('/registracija',async(req,res)=>{
     try{
