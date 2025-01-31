@@ -74,7 +74,7 @@ function Login({ setLoading }) {
                     onChange={(e) => setPassword(e.target.value)} 
                     required />
                 </label>
-                <button type="submit">Login</button> 
+                <button type="submit">Login</button>
             </form>
             <p id="error-message"></p>
         </div>
