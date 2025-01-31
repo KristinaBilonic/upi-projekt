@@ -47,8 +47,10 @@ function Login({ setLoading }) {
             setError(err.message || 'An error occurred during login');
             setError(err);
             alert(err)
-        }
-        
+        }    
+    };
+    const handlesignup = async (event) => {
+        navigate('/signup');
     };
     //onClick={handleLogin} za botun (na kraju netriba al neka stoji za ostale stvari ako zatriba)
     //JSX - Javascript XML notation
@@ -76,6 +78,7 @@ function Login({ setLoading }) {
                 </label>
                 <button type="submit">Login</button> 
             </form>
+            <button type="submit" onClick={handlesignup} >Registracija</button>
             <p id="error-message"></p>
         </div>
     );
