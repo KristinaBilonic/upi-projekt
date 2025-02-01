@@ -76,7 +76,7 @@ function Login({ setLoading }) {
                     onChange={(e) => setPassword(e.target.value)} 
                     required />
                 </label>
-                <button type="submit">Login</button> 
+                <button type="submit">Login</button>
             </form>
             <button type="submit" onClick={handlesignup} >Registracija</button>
             <p id="error-message"></p>
