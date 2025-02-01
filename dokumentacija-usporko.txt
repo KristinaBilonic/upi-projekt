@@ -1,3 +1,9 @@
+kike 1.2.
+	unos podataka u homepageu za željeno putovanje
+	naprvaljen prikaz buseva za jedan smijer i za povratna putovanja
+	dodana ruta u grad_rute
+	ispravila greškicu na bazi
+
 kike 27.1. 
 	napravila sve rute do kraja i ispravila greškice na prethodnim
 	unila testne podatke u bazu podataka
