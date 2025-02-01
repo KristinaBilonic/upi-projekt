@@ -29,7 +29,7 @@ function JedanSmjer() {
         const data = await response.json();
         return data.id;
       } catch (error) {
-        console.error("Error fetching city ID:", error);
+        console.error("Error: ", error);
         return null;
       }
     };
@@ -50,7 +50,7 @@ function JedanSmjer() {
     const fetchBuses = async () => {
       try {
         if (!gradOdId || !gradDoId || !datumDo) {
-          console.warn(" Missing parameters:", { gradOdId, gradDoId, datumDo });
+          console.warn("Nedostaje unos:", { gradOdId, gradDoId, datumDo });
           return;
         }
         const response = await fetch(
@@ -75,7 +75,7 @@ function JedanSmjer() {
 
   const handleJedanSmjer = (bus) => {
     if(!povratno){
-      navigate(`/narudzba?od=${gradOd}&do=${gradDo}&datum_polaska=${datumDo}&datum_povratka=${datumOd}&putnici=${putnici}&busId=${bus._id}`);
+      navigate(`/narudzba?od=${gradOd}&do=${gradDo}&datum_polaska=${datumOd}&datum_povratka=${datumDo}&putnici=${putnici}&busId=${bus._id}`);
     }else{
       navigate(`/povratno?od=${gradDo}&do=${gradOd}&datum_polaska=${datumOd}&putnici=${putnici}&busId=${bus._id}`);
     }

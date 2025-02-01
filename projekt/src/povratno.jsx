@@ -7,20 +7,17 @@ function Povratno() {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-
   const gradOd = searchParams.get("od"); 
   const gradDo = searchParams.get("do"); 
-  const datumPovratka = searchParams.get("datum_polaska"); // Now represents return date
+  const datumPovratka = searchParams.get("datum_polaska");
   const putnici = Number(searchParams.get("putnici")) || 1;
-  const busIdprvi = searchParams.get("busId"); // Previous trip busId
-
+  const busIdprvi = searchParams.get("busId"); 
   const [gradOdId, setGradOdId] = useState(null);
   const [gradDoId, setGradDoId] = useState(null);
   const [buses, setBuses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch city IDs
   useEffect(() => {
     const GetGradID = async (naziv) => {
       try {
@@ -29,7 +26,7 @@ function Povratno() {
         const data = await response.json();
         return data.id;
       } catch (error) {
-        console.error("Error fetching city ID:", error);
+        console.error("Error:", error);
         return null;
       }
     };
@@ -46,12 +43,12 @@ function Povratno() {
     fetchGradIds();
   }, [gradOd, gradDo]);
 
-  // Fetch return buses
+
   useEffect(() => {
     const fetchBuses = async () => {
       try {
         if (!gradOdId || !gradDoId || !datumPovratka) {
-          console.warn("Missing parameters:", { gradOdId, gradDoId, datumPovratka });
+          console.warn("Nedostaju parametri:", { gradOdId, gradDoId, datumPovratka });
           return;
         }
         const response = await fetch(
@@ -73,9 +70,8 @@ function Povratno() {
     }
   }, [gradOdId, gradDoId, datumPovratka]);
 
-  // Proceed to final booking with selected return trip
   const handlePovratno = (bus) => {
-    navigate(`/narudzba?od=${gradDo}&do=${gradOd}&datum_polaska=${datumPovratka}&putnici=${putnici}&busIdprvi=${busIdprvi}&busIdReturn=${bus._id}`);
+    navigate(`/narudzba?busIdprvi=${busIdprvi}&busIdPovratni=${bus._id}`);
   };
 
   return (
