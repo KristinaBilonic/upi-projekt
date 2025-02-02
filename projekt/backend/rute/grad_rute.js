@@ -37,6 +37,18 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/naziv/:naziv', async (req, res) => {
+    try {
+        const grad = await Grad.findOne({naziv: req.params.naziv});
+        if(!grad){
+            return res.status(404).json({error:"Grad ne postoji"});
+        }
+        res.json({id:grad._id});
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+
 router.delete('/:id',async(req,res)=>{
     try{
         const grad=await Grad.findByIdAndDelete(req.params.id);

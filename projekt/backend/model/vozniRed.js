@@ -6,7 +6,8 @@ const vozniRedSchema = new mongoose.Schema({
     datum_dolaska: { type: Date, required: true },
     vrijeme_polaska: { type: String, required: true },
     vrijeme_dolaska: { type: String, required: true },
-    bus_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Bus', required: true }
+    bus_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Bus', required: true },
+    cijena: { type: Number, required: true, default: 0 }
 });
 const VozniRed = mongoose.model('VozniRed', vozniRedSchema);
 export default VozniRed;
