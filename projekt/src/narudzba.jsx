@@ -1,9 +1,14 @@
 import React from 'react';
 import './narudzba.css';
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Narudzba = ({ setPassengers }) => {
     const params = new URL(document.location.toString()).searchParams;
-    const passengerCount = params.get("putnici");
+    const passengerCount = Number(localStorage.getItem('passengers')) || 1;
+    const navigate = useNavigate();
+    const location = useLocation();
+    const selectedSeats = location.state?.selectedSeats || [];
+
     const toPreview = () => {
         const passengers = [];
         const fields = document.querySelectorAll('[type=text]');
@@ -17,7 +22,13 @@ const Narudzba = ({ setPassengers }) => {
         if (valid) {
             location.href = "/pregledPrijeKupnje";
         }
+        navigate('/pregledPrijeKupnje');
     };
+
+    const handlesjedala = () => {
+        navigate('/sjedala');
+    };
+
     return (
         <div className="container">
             <div className="section">
@@ -31,7 +42,17 @@ const Narudzba = ({ setPassengers }) => {
             </div>
             <div className="section">
                 <h3>Rezervacija sjedala</h3>
-                <button>Odaberi svoje sjedalo</button>
+                <button onClick={handlesjedala}>Odaberi svoje sjedalo</button>
+                {selectedSeats.length > 0 && (
+                    <div>
+                        <h4>Odabrana sjedala:</h4>
+                        <ul>
+                            {selectedSeats.map(seat => (
+                                <li key={seat}>{seat}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
             <div className="section">
                 <h3>Dodatna prtljaga</h3>
@@ -46,7 +67,6 @@ const Narudzba = ({ setPassengers }) => {
                         <span>x</span>
                     </label>
                 </div>
-
             </div>
             <div className="section">
                 <h3>Plaćanje</h3>
