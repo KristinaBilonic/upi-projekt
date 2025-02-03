@@ -25,7 +25,8 @@ function App() {
   const goBack = () => history.back();
   const toProfile = () => location.pathname = '/profil';
 
-  let passengers = ['Ana Anić', 'Ivo Ivić', 'Pero Perić'];
+  const [passengers, setPassengers] = useState(['Ana Anić', 'Ivo Ivić', 'Pero Perić']);
+
   return (
     <>
       {!loading && (
@@ -58,8 +59,8 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/jedansmjer" element={<JedanSmjer />} />
             <Route path="/povratno" element={<Povratno />} />
-            <Route path="/narudzba" element={<Narudzba passengers={passengers} />} />
-            <Route path="/pregledPrijeKupnje" element={loading ? <Ucitavanje /> : <PregledPrijeKupnje setLoading={setLoading} />} />
+            <Route path="/narudzba" element={<Narudzba setPassengers={setPassengers} />} />
+            <Route path="/pregledPrijeKupnje" element={loading ? <Ucitavanje /> : <PregledPrijeKupnje setLoading={setLoading} passengers={passengers} />} />
             <Route path="/placeno" element={<Placeno />} />
             <Route path="/nijePlaceno" element={<NijePlaceno />} />
             <Route path="/karta" element={<Karta />} />

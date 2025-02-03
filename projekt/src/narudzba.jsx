@@ -1,13 +1,33 @@
 import React from 'react';
 import './narudzba.css';
 
-const Narudzba = ({ passengers }) => {
-    const toPreview = () => location.href = "/pregledPrijeKupnje";
+const Narudzba = ({ setPassengers }) => {
+    const params = new URL(document.location.toString()).searchParams;
+    const passengerCount = params.get("putnici");
+    const toPreview = () => {
+        const passengers = [];
+        const fields = document.querySelectorAll('[type=text]');
+        let valid = true;
+        for (let i = 0; i < passengerCount * 2; i++) {
+            valid &&= fields[i].checkValidity();
+            passengers.push(fields[i].value + ' ' + fields[i++].value);
+            valid &&= fields[i].checkValidity();
+        }
+        setPassengers(passengers);
+        if (valid) {
+            location.href = "/pregledPrijeKupnje";
+        }
+    };
     return (
         <div className="container">
             <div className="section">
                 <h3>Putnici</h3>
-                <p>{ passengers.join(', ') }</p>
+                <div className="input-table">{Object.keys('*'.repeat(passengerCount).split('')).map(i => (
+                    <div key={i} className="input-group">
+                        <input placeholder="Ime putnika" name="passengerFirstName" type="text" required />
+                        <input placeholder="Prezime putnika" name="passengerLastName" type="text" required />
+                    </div>
+                ))}</div>
             </div>
             <div className="section">
                 <h3>Rezervacija sjedala</h3>
