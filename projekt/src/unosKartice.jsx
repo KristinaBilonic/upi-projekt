@@ -41,6 +41,7 @@ export default function UnosKartice() {
           </div>
         </div>
 
+        <br />
         <button className="ok-button">OK</button>
       </div>
     </div>

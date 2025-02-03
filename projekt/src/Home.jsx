@@ -34,9 +34,9 @@ const Home = ({ setPageTitle }) => {
 
   return (
     <div className="container">
-      <h1>Kupnja autobusnih karata</h1>
+      <h1>KUPNJA AUTOBUSNIH KARATA</h1>
       <div>
-        <label htmlFor="fromLocation">Od:</label>
+        <label htmlFor="fromLocation">OD:</label>
         <input
           type="text"
           id="fromLocation"
@@ -57,11 +57,11 @@ const Home = ({ setPageTitle }) => {
             checked={isReturnTrip}
             onChange={(e) => setIsReturnTrip(e.target.checked)}
           />
-          Povratno putovanje
+          POVRATNO PUTOVANJE
         </label>
       </div>
       <div>
-        <label htmlFor="toLocation">Do:</label>
+        <label htmlFor="toLocation">DO:</label>
         <input
           type="text"
           id="toLocation"
@@ -77,7 +77,7 @@ const Home = ({ setPageTitle }) => {
         />
       </div>
       <div>
-        <label htmlFor="passengers">Broj putnika:</label>
+        <label htmlFor="passengers">BROJ PUTNIKA:</label>
         <input
           type="number"
           id="passengers"
