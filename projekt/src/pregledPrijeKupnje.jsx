@@ -1,13 +1,19 @@
 import React from 'react';
 import './pregledPrijeKupnje.css';
+import { useNavigate, useLocation } from "react-router-dom";
 
 function PregledPrijeKupnje({ setLoading, passengers }) {
-  const handlePayment = () => {
-    setLoading(true)
-    setTimeout(() => {
-      location.href = '/placeno';
-      //location.href = '/nijePlaceno';
-    }, 3000);
+  // const handlePayment = () => {
+  //   setLoading(true)
+  //   setTimeout(() => {
+  //     location.href = '/placeno';
+  //     //location.href = '/nijePlaceno';
+  //   }, 3000);
+  // };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleunosKartice = () => {
+    navigate('/unosKartice');
   };
   return (
     <div className="container">
@@ -22,7 +28,7 @@ function PregledPrijeKupnje({ setLoading, passengers }) {
         <p>{ JSON.stringify(passengers) }</p>
       </div>
 
-      <button onClick={handlePayment}>Plati</button>
+      <button onClick={handleunosKartice}>Plati</button>
     </div>
   );
 }
