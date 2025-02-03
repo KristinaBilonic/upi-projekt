@@ -32,7 +32,7 @@ const Narudzba = ({ setPassengers }) => {
     return (
         <div className="container">
             <div className="section">
-                <h3>Putnici</h3>
+                <h3>PUTNICI</h3>
                 <div className="input-table">{Object.keys('*'.repeat(passengerCount).split('')).map(i => (
                     <div key={i} className="input-group">
                         <input placeholder="Ime putnika" name="passengerFirstName" type="text" required />
@@ -41,6 +41,9 @@ const Narudzba = ({ setPassengers }) => {
                 ))}</div>
             </div>
             <div className="section">
+                <h3>REZERVACIJA SJEDALA</h3>
+                <button>Odaberi svoje sjedalo</button>
+
                 <h3>Rezervacija sjedala</h3>
                 <button onClick={handlesjedala}>Odaberi svoje sjedalo</button>
                 {selectedSeats.length > 0 && (
@@ -53,9 +56,10 @@ const Narudzba = ({ setPassengers }) => {
                         </ul>
                     </div>
                 )}
+
             </div>
             <div className="section">
-                <h3>Dodatna prtljaga</h3>
+                <h3>DODATNA PRTLJAGA</h3>
                 <p> {'> '}20 kg (5€)</p>
                 <div className="container radio-container">
                     <label>
@@ -69,7 +73,7 @@ const Narudzba = ({ setPassengers }) => {
                 </div>
             </div>
             <div className="section">
-                <h3>Plaćanje</h3>
+                <h3>PLAĆANJE</h3>
                 <div className="container radio-container">
                     <label>
                         <input type="radio" name="payment-method" defaultChecked />

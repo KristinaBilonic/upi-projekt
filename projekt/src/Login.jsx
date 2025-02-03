@@ -58,7 +58,7 @@ function Login({ setLoading }) {
     //JSX - Javascript XML notation
     return (
         <div className="login-container">
-            <h1>Login</h1>
+            <h1>LOGIN</h1>
             <form id="login-form" onSubmit={loginAction}>
                 <label>
                     Email:
