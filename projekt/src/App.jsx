@@ -16,6 +16,7 @@ import Profil from './profil';
 import PovijestKupnji from './povijestKupnji';
 import UnosKartice from './unosKartice';
 import Sjedala from './sjedala';
+import Kartice from './App';
 
 function App() {
   const showBackBtn = !['/', '/signup', , '/home', '/karta', '/placeno', '/nijePlaceno'].includes(location.pathname);
@@ -68,6 +69,7 @@ function App() {
             <Route path="/povijestKupnji" element={<PovijestKupnji passengers={passengers} setPageTitle={setPageTitle} />} />
             <Route path="/sjedala" element={<Sjedala />} />
             <Route path="/unosKartice" element={<UnosKartice />} />
+            <Route path="/kartice" element={<Kartice />} /> 
           </Routes>
         </Router>
       </main>
