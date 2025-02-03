@@ -9,7 +9,7 @@ function Karta() {
     <div className="container">
       <h1>Karta</h1>
 
-      <img src="/qr.png" alt="QR kod" />
+      <img src="/qr.png" alt="QR kod" height="120px" />
 
       <div>
         <p>Datum kupnje: 05.02.2025.</p>
