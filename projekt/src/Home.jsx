@@ -10,14 +10,17 @@ const Home = ({ setPageTitle }) => {
   const [fromDate, setFromDate] = useState(null);
   const [toLocation, setToLocation] = useState('');
   const [toDate, setToDate] = useState(null);
-  const [passengers, setPassengers] = useState(1);
+  const [passengers, setPassengers] = useState(() => {
+    return Number(localStorage.getItem('passengers')) || 1;
+  });
   const [isReturnTrip, setIsReturnTrip] = useState(false);
-  
+
   const handleSearch = () => {
     console.log('From:', fromLocation, 'Date:', fromDate);
     console.log('To:', toLocation, 'Date:', toDate);
     console.log('Passengers:', passengers);
     console.log('Return Trip:', isReturnTrip);
+    localStorage.setItem("passengers", passengers);
     const formatiraniDatOd = `${fromDate.getFullYear()}-${String(fromDate.getMonth() + 1).padStart(2, '0')}-${String(fromDate.getDate()).padStart(2, '0')}`;
 
     if(!isReturnTrip){
@@ -82,7 +85,7 @@ const Home = ({ setPageTitle }) => {
           type="number"
           id="passengers"
           value={passengers}
-          onChange={(e) => setPassengers(e.target.value)}
+          onChange={(e) => setPassengers(Number(e.target.value))}
           min={1}
         />
       </div>

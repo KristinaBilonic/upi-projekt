@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 
 function JedanSmjer() {
   const navigate =useNavigate();
-
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
@@ -14,7 +13,7 @@ function JedanSmjer() {
   const gradDo = searchParams.get("do"); 
   const datumDo = searchParams.get("datum_polaska"); 
   const datumOd = searchParams.get("datum_povratka"); 
-  const putnici = Number(searchParams.get("putnici")) || 1;
+  const putnici = Number(searchParams.get("putnici")) || Number(localStorage.getItem('passengers')) || 1;
   const povratno = searchParams.get("povratno"); 
   const [gradOdId, setGradOdId] = useState(null);
   const [gradDoId, setGradDoId] = useState(null);
@@ -72,6 +71,9 @@ function JedanSmjer() {
       fetchBuses();
     }
   }, [gradOdId, gradDoId, datumDo]);
+  useEffect(() => {
+    localStorage.setItem('passengers', putnici);
+  }, [putnici]);  
 
   const handleJedanSmjer = (bus) => {
     if(!povratno){
@@ -82,14 +84,11 @@ function JedanSmjer() {
   };
   return (
     <div className="container">
-      <header className="header">
-        <h1 className="logo">AUTOBUSNI VOZNI RED</h1>
-      </header>
+     
       <main>
         <div className="search-bar">
           <div className="fields">
             <h1>{gradOd} {"\u2192"}  {gradDo}</h1>
-
           </div>
         </div>
         <div className="results">

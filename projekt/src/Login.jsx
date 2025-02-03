@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "./Login.css";
 
 function Login({ setLoading }) {
     //kod koji je bitan za komponentu kad je pokrenuta aplikacija dolazi unutar funkcije
@@ -36,6 +37,7 @@ function Login({ setLoading }) {
             // Spremanje tokena i korisničkih podataka u lokalno pohranu
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+            localStorage.setItem('korisnikID', data.user._id);
 
             // Prikaz poruke o uspješnoj prijavi
             alert('Successfully logged in!');
