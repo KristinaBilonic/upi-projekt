@@ -1,3 +1,6 @@
+Dana 03.02.2025. Marijana sredila back botun, dodala prikaz datuma kupnje na pregled prije kupnje, 
+dodala validaciju na naslovnu stranicu (home), dodan QR kod na kartu, dodan botun za pokretat backend u VS Code.
+
 Dana 02.02.2025. Marijana dodala Unos dodatnih putnika
 
 kike 1.2.

@@ -14,6 +14,7 @@ const Home = ({ setPageTitle }) => {
     return Number(localStorage.getItem('passengers')) || 1;
   });
   const [isReturnTrip, setIsReturnTrip] = useState(false);
+  const [validationError, setValidationError] = useState(null);
 
   const handleSearch = () => {
     console.log('From:', fromLocation, 'Date:', fromDate);
@@ -21,13 +22,20 @@ const Home = ({ setPageTitle }) => {
     console.log('Passengers:', passengers);
     console.log('Return Trip:', isReturnTrip);
     localStorage.setItem("passengers", passengers);
+    const valid = fromLocation && toLocation && fromDate && !isReturnTrip || toDate;
+    if (!valid) {
+      setValidationError('Potrebno unijeti sve podatke!');
+      return;
+    }
     const formatiraniDatOd = `${fromDate.getFullYear()}-${String(fromDate.getMonth() + 1).padStart(2, '0')}-${String(fromDate.getDate()).padStart(2, '0')}`;
 
     if(!isReturnTrip){
-      navigate(`/jedansmjer?od=${fromLocation}&do=${toLocation}&datum_polaska=${formatiraniDatOd}&putnici=${passengers}`);
+      /*navigate*/
+      location.href=(`/jedansmjer?od=${fromLocation}&do=${toLocation}&datum_polaska=${formatiraniDatOd}&putnici=${passengers}`);
     }else{
       const formatiraniDatDO = `${toDate.getFullYear()}-${String(toDate.getMonth() + 1).padStart(2, '0')}-${String(toDate.getDate()).padStart(2, '0')}`;
-      navigate(`/jedansmjer?od=${fromLocation}&do=${toLocation}&datum_polaska=${formatiraniDatOd}&datum_povratka=${formatiraniDatDO}&putnici=${passengers}&povratno=${isReturnTrip}`);
+      /*navigate*/
+      location.href=(`/jedansmjer?od=${fromLocation}&do=${toLocation}&datum_polaska=${formatiraniDatOd}&datum_povratka=${formatiraniDatDO}&putnici=${passengers}&povratno=${isReturnTrip}`);
     }
 
   };
@@ -45,13 +53,19 @@ const Home = ({ setPageTitle }) => {
           id="fromLocation"
           value={fromLocation}
           onChange={(e) => setFromLocation(e.target.value)}
+          required
         />
         <DatePicker
+          id={'fromDate'}
           selected={fromDate}
           onChange={(date) => setFromDate(date)}
           dateFormat="dd/MM/yyyy"
           placeholderText="Select date"
+          required
         />
+      </div>
+      <div style={{ color: "red" }}>
+        { validationError }
       </div>
       <div>
         <label>

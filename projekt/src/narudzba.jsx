@@ -15,7 +15,7 @@ const Narudzba = ({ setPassengers }) => {
         let valid = true;
         for (let i = 0; i < passengerCount * 2; i++) {
             valid &&= fields[i].checkValidity();
-            passengers.push(fields[i].value + ' ' + fields[i++].value);
+            passengers.push(fields[i].value + ' ' + fields[++i].value);
             valid &&= fields[i].checkValidity();
         }
         setPassengers(passengers);
