@@ -82,9 +82,7 @@ function JedanSmjer() {
   };
   return (
     <div className="container">
-      <header className="header">
-        <h1 className="logo">AUTOBUSNI VOZNI RED</h1>
-      </header>
+     
       <main>
         <div className="search-bar">
           <div className="fields">
