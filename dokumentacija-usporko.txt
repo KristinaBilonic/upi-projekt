@@ -1,3 +1,20 @@
+Za pokretanje projekta:
+Otvorit novi terminal:
+	cd projekt
+	npm install
+	cd backend
+	node server.js
+
+Otvorit 2. terminal:
+	cd projekt
+	npm run dev
+
+4.2. (prije 10:00)
+ljuba:
+	napravia narudžbu, odabir sjedala, pregled karte prije kupnje, plaćanje i spremanje nove karte u bazu podataka
+kike:
+	napravila prikaz profila, prikaz svih kartica korisnika (dodavanje i brisanje kartica) i prikaz svih karta korisnika
+
 Dana 03.02.2025. Marijana sredila back botun, dodala prikaz datuma kupnje na pregled prije kupnje, 
 dodala validaciju na naslovnu stranicu (home), dodan QR kod na kartu, dodan botun za pokretat backend u VS Code.
 
@@ -30,10 +47,7 @@ kike:
 napravila san bazu na mongodb-u, modele, rute samo za korisnika i server al nisan dodavala podatke u bazu.
 testirala sve metode preko postmana.
 za sad je napravljeno jedino da registracija i prijava funkcioniraju, kasnije ću napravit ostalo.
-za pokretanje potrebno:
 
-	cd projekt
-	cd install
 
 
 extra info (višemanje nebitno)
