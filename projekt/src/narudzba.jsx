@@ -1,112 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './narudzba.css';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Narudzba = ({ setPassengers }) => {
-    const navigate = useNavigate();
-
-    // Get the number of passengers from localStorage
+    const params = new URL(document.location.toString()).searchParams;
     const passengerCount = Number(localStorage.getItem('passengers')) || 1;
+    const navigate = useNavigate();
+    const location = useLocation();
+    const selectedSeats = location.state?.selectedSeats || [];
 
-    // Load passenger names from localStorage or initialize an empty array with the correct number of passengers
-    const [passengers, setLocalPassengers] = useState(() => {
-        const storedPassengers = JSON.parse(localStorage.getItem("passengerNames"));
-        return storedPassengers?.length === passengerCount
-            ? storedPassengers
-            : Array.from({ length: passengerCount }, () => ({ firstName: "", lastName: "" }));
-    });
-
-    // Load selected seats from localStorage
-    const [selectedSeats, setSelectedSeats] = useState(() => {
-        return JSON.parse(localStorage.getItem("selectedSeats"))?.filter(seat => seat) || [];
-    });
-
-    // Save passenger names and seats to localStorage whenever they change
-    useEffect(() => {
-        localStorage.setItem("passengerNames", JSON.stringify(passengers));
-        localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
-    }, [passengers, selectedSeats]);
-
-    // Update passengers when passenger count changes
-    useEffect(() => {
-        setLocalPassengers((prevPassengers) => {
-            const updatedPassengers = Array.from({ length: passengerCount }, (_, i) => ({
-                firstName: prevPassengers[i]?.firstName || "",
-                lastName: prevPassengers[i]?.lastName || ""
-            }));
-            return updatedPassengers;
-        });
-    }, [passengerCount]);
-
-    // Handle input changes for each passenger
-    const handleInputChange = (index, field, value) => {
-        const updatedPassengers = [...passengers];
-        updatedPassengers[index][field] = value;
-        setLocalPassengers(updatedPassengers);
-    };
-
-    // Handle baggage selection
-    const handleBaggageSelection = (hasExtraBaggage) => {
-        localStorage.setItem("extraBaggage", hasExtraBaggage);
-    };
-
-    const handleSeatSelection = () => {
-        localStorage.removeItem("selectedSeats"); // Clear previous selection
-        navigate('/sjedala');
-    };
-
-    // Listen for seat changes after user selects new ones
-    useEffect(() => {
-        const savedSeats = JSON.parse(localStorage.getItem("selectedSeats")) || [];
-        setSelectedSeats(savedSeats); // Update state with new seat choices
-    }, []);
-
-    // Navigate to preview page after validation
     const toPreview = () => {
-        if (passengers.every(p => p.firstName.trim() && p.lastName.trim())) {
-            setPassengers(passengers);
-            localStorage.setItem("passengerNames", JSON.stringify(passengers));
-            navigate('/pregledPrijeKupnje');
-        } else {
-            alert("Molimo unesite sva imena i prezimena.");
+        const passengers = [];
+        const fields = document.querySelectorAll('[type=text]');
+        let valid = true;
+        for (let i = 0; i < passengerCount * 2; i++) {
+            valid &&= fields[i].checkValidity();
+            passengers.push(fields[i].value + ' ' + fields[++i].value);
+            valid &&= fields[i].checkValidity();
         }
+        setPassengers(passengers);
+        if (valid) {
+            location.href = "/pregledPrijeKupnje";
+        }
+        navigate('/pregledPrijeKupnje');
+    };
+
+    const handlesjedala = () => {
+        navigate('/sjedala');
     };
 
     return (
         <div className="container">
             <div className="section">
-                <h3>Putnici</h3>
-                <div className="input-table">
-                    {passengers.map((p, index) => (
-                        <div key={index} className="input-group">
-                            <input
-                                type="text"
-                                placeholder={`Ime putnika ${index + 1}`}
-                                value={p.firstName}
-                                onChange={(e) => handleInputChange(index, "firstName", e.target.value)}
-                                required
-                            />
-                            <input
-                                type="text"
-                                placeholder={`Prezime putnika ${index + 1}`}
-                                value={p.lastName}
-                                onChange={(e) => handleInputChange(index, "lastName", e.target.value)}
-                                required
-                            />
-                        </div>
-                    ))}
-                </div>
+                <h3>PUTNICI</h3>
+                <div className="input-table">{Object.keys('*'.repeat(passengerCount).split('')).map(i => (
+                    <div key={i} className="input-group">
+                        <input placeholder="Ime putnika" name="passengerFirstName" type="text" required />
+                        <input placeholder="Prezime putnika" name="passengerLastName" type="text" required />
+                    </div>
+                ))}</div>
             </div>
-
-            {/* ✅ FIX: SEAT SELECTION BUTTON NOW WORKS PROPERLY ✅ */}
             <div className="section">
                 <h3>REZERVACIJA SJEDALA</h3>
                 <button>Odaberi svoje sjedalo</button>
 
                 <h3>Rezervacija sjedala</h3>
-                <button onClick={handleSeatSelection}>
-                    {selectedSeats.length > 0 ? "Promijeni sjedala" : "Odaberi svoja sjedala"}
-                </button>
+                <button onClick={handlesjedala}>Odaberi svoje sjedalo</button>
                 {selectedSeats.length > 0 && (
                     <div>
                         <h4>Odabrana sjedala:</h4>
@@ -119,23 +58,20 @@ const Narudzba = ({ setPassengers }) => {
                 )}
 
             </div>
-
             <div className="section">
-                <h3>Dodatna prtljaga</h3>
-                <p>{"> "}20 kg (5€)</p>
-
+                <h3>DODATNA PRTLJAGA</h3>
+                <p> {'> '}20 kg (5€)</p>
                 <div className="container radio-container">
                     <label>
-                        <input type="radio" name="extra-luggage" onChange={() => handleBaggageSelection(true)} />
+                        <input type="radio" name="extra-luggage" />
                         <span>✓</span>
                     </label>
                     <label>
-                        <input type="radio" name="extra-luggage" onChange={() => handleBaggageSelection(false)} defaultChecked />
+                        <input type="radio" name="extra-luggage" defaultChecked />
                         <span>x</span>
                     </label>
                 </div>
             </div>
-
             <div className="section">
                 <h3>PLAĆANJE</h3>
                 <div className="container radio-container">
@@ -153,7 +89,6 @@ const Narudzba = ({ setPassengers }) => {
                     </label>
                 </div>
             </div>
-
             <button className="button" onClick={toPreview}>Dalje</button>
         </div>
     );

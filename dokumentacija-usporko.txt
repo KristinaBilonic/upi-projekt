@@ -46,8 +46,6 @@ npm install express
 npm install cors
 npm install bcrypt
 npm install jsonwebtoken
-npm install axios
-npm install nodemailer dotenv
 
 podatci za bazu podataka ako bude trebalo
 ime: kike
