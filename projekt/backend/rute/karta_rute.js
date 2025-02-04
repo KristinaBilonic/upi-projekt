@@ -18,7 +18,6 @@ router.post('/', async (req, res) => {
 router.get('/',async(req,res)=>{
     try{
         const karte=await Karta.find()
-            .populate('sjedalo_ID','red stupac')
             .populate('vozni_red_ID','mjesto_polaska mjesto_dolaska datum_polaska vrijeme_polaska datum_dolaska vrijeme_dolaska')
             .populate('korisnik_ID','ime prezime email')
         res.json(karte)
@@ -30,7 +29,6 @@ router.get('/',async(req,res)=>{
 router.get('/:id', async (req, res) => {
     try {
         const karta = await Karta.findById(req.params.id)
-            .populate('sjedalo_ID', 'red stupac')
             .populate('vozni_red_ID', 'mjesto_polaska mjesto_dolaska datum_polaska vrijeme_polaska datum_dolaska vrijeme_dolaska')
             .populate('korisnik_ID', 'ime prezime email');
         if (!karta) {
@@ -45,7 +43,6 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const karta = await Karta.findByIdAndUpdate(req.params.id, req.body, { new: true })
-            .populate('sjedalo_ID', 'red stupac')
             .populate('vozni_red_ID', 'mjesto_polaska mjesto_dolaska datum_polaska vrijeme_polaska datum_dolaska vrijeme_dolaska')
             .populate('korisnik_ID', 'ime prezime email');
         if (!karta) {
@@ -74,7 +71,6 @@ router.get('/voznired/:vozniRedID', async (req, res) => {
     try {
         const { vozniRedID } = req.params;
         const tickets = await Karta.find({ vozni_red_ID: vozniRedID })
-            .populate('sjedalo_ID', 'red stupac')
             .populate('vozni_red_ID', 'mjesto_polaska mjesto_dolaska datum_polaska vrijeme_polaska datum_dolaska vrijeme_dolaska')
             .populate('korisnik_ID', 'ime prezime email');
         if (tickets.length === 0) {
@@ -86,5 +82,3 @@ router.get('/voznired/:vozniRedID', async (req, res) => {
     }
 });
 export default router;
-
-
