@@ -15,6 +15,8 @@
     align-items: flex-start;
     position: relative;
     width: 400px;
+    
+    
   }
   
   
@@ -49,6 +51,7 @@
     justify-content: space-between;
     width: 100%;
     align-items: center;
+    
   }
   
  
@@ -65,16 +68,18 @@
   
  
   .ok-button {
-    align-self: flex-end; 
+    align-self: flex-start; 
     width: 100px;
     height: 50px;
     background-color: white;
-    border: 2px solid #bbb;
+    border: 2px solid #090808;
     border-color: black;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 50px;
+    display: block;
+    
   }
   
   .ok-button:hover {

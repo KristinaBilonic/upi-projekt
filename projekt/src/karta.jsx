@@ -84,7 +84,7 @@ const Karta = () => {
     <div className="container">
       <h1>Vaša Karta</h1>
 
-      <img src="/qr.png" alt="QR kod" />
+      <img src="/qr.png" alt="QR kod" height="120px" />
 
       <div>
         <p><strong>Polazak:</strong> {fromCity} → {toCity}</p>

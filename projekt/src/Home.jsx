@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = ({ setPageTitle }) => {
   const navigate = useNavigate();
+
   const [fromLocation, setFromLocation] = useState(localStorage.getItem("fromCity") || '');
   const [fromDate, setFromDate] = useState(localStorage.getItem("departureDate") ? new Date(localStorage.getItem("departureDate")) : null);
   const [toLocation, setToLocation] = useState(localStorage.getItem("toCity") || '');
   const [toDate, setToDate] = useState(localStorage.getItem("returnDate") ? new Date(localStorage.getItem("returnDate")) : null);
   const [passengers, setPassengers] = useState(Number(localStorage.getItem('passengers')) || 1);
   const [isReturnTrip, setIsReturnTrip] = useState(localStorage.getItem("isReturnTrip") === "true");
+
 
   const handleSearch = () => {
     // Save selected cities, dates, and passengers to localStorage
@@ -23,7 +25,6 @@ const Home = ({ setPageTitle }) => {
 
     // Format date for navigation
     const formattedFromDate = fromDate ? fromDate.toISOString().split("T")[0] : "";
-
     if (!isReturnTrip) {
       navigate(`/jedansmjer?od=${fromLocation}&do=${toLocation}&datum_polaska=${formattedFromDate}&putnici=${passengers}`);
     } else {
@@ -36,11 +37,15 @@ const Home = ({ setPageTitle }) => {
 
   return (
     <div className="container">
-      <h1>Kupnja autobusnih karata</h1>
+      <h1>KUPNJA AUTOBUSNIH KARATA</h1>
       <div>
+
         <label>Od:</label>
         <input type="text" value={fromLocation} onChange={(e) => setFromLocation(e.target.value)} />
         <DatePicker selected={fromDate} onChange={(date) => setFromDate(date)} dateFormat="dd/MM/yyyy" placeholderText="Select date" />
+      </div>
+      <div style={{ color: "red" }}>
+        { validationError }
       </div>
       <div>
         <label>

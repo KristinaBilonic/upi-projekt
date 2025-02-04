@@ -5,7 +5,7 @@ const Placeno = () => {
   return (
     <div className="container" style={{ height: '450px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-        <h1>Uspješno plaćanje</h1>
+        <h1>Uspješno plaćanje!</h1>
         <div style={{ marginTop: '20px' }}>
           <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: '#4CAF50', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <i className="fas fa-check" style={{ color: 'white', fontSize: '30px' }}></i>

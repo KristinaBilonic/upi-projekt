@@ -34,6 +34,7 @@ function PregledPrijeKupnje() {
       <h1>Pregled Rezervacije</h1>
 
       <div>
+
         <p><strong>Polazak:</strong> {fromCity} → {toCity}</p>
         <p><strong>Datum polaska:</strong> {departureDate}</p>
         {returnDate && <p><strong>Datum povratka:</strong> {returnDate}</p>}

@@ -100,6 +100,9 @@ const Narudzba = ({ setPassengers }) => {
 
             {/* ✅ FIX: SEAT SELECTION BUTTON NOW WORKS PROPERLY ✅ */}
             <div className="section">
+                <h3>REZERVACIJA SJEDALA</h3>
+                <button>Odaberi svoje sjedalo</button>
+
                 <h3>Rezervacija sjedala</h3>
                 <button onClick={handleSeatSelection}>
                     {selectedSeats.length > 0 ? "Promijeni sjedala" : "Odaberi svoja sjedala"}
@@ -114,11 +117,13 @@ const Narudzba = ({ setPassengers }) => {
                         </ul>
                     </div>
                 )}
+
             </div>
 
             <div className="section">
                 <h3>Dodatna prtljaga</h3>
                 <p>{"> "}20 kg (5€)</p>
+
                 <div className="container radio-container">
                     <label>
                         <input type="radio" name="extra-luggage" onChange={() => handleBaggageSelection(true)} />
@@ -132,7 +137,7 @@ const Narudzba = ({ setPassengers }) => {
             </div>
 
             <div className="section">
-                <h3>Plaćanje</h3>
+                <h3>PLAĆANJE</h3>
                 <div className="container radio-container">
                     <label>
                         <input type="radio" name="payment-method" defaultChecked />

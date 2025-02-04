@@ -19,14 +19,15 @@ import Sjedala from './sjedala';
 // import popis from './popis';
 
 function App() {
-  const showBackBtn = !['/', '/signup', , '/home', '/karta', '/placeno', '/nijePlaceno'].includes(location.pathname);
+  const pathOnly = location.pathname.includes('?') ? location.pathname : location.pathname.split('?')[0];
+  const showBackBtn = !['/', '/signup', , '/home', '/karta', '/placeno', '/nijePlaceno'].includes(pathOnly);
   const showProfile = '/home' === location.pathname;
   const [loading, setLoading] = useState(false);
   const [pageTitle, setPageTitle] = useState(null);
   const goBack = () => history.back();
   const toProfile = () => location.pathname = '/profil';
 
-  const [passengers, setPassengers] = useState(['Ana Anić', 'Ivo Ivić', 'Pero Perić']);
+  const [passengers, setPassengers] = useState([]);
 
   return (
     <>

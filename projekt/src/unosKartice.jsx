@@ -93,7 +93,11 @@ export default function UnosKartice() {
           </div>
         </div>
 
+
+        <br />
+
         <button className="ok-button" onClick={handlePayment}>OK</button>
+
       </div>
     </div>
   );
