@@ -38,7 +38,6 @@ function Login({ setLoading }) {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             localStorage.setItem('korisnikID', data.user._id);
-            localStorage.setItem('email', data.user.email);
 
             // Prikaz poruke o uspješnoj prijavi
             alert('Successfully logged in!');

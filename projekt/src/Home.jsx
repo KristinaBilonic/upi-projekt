@@ -3,35 +3,43 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
 
+
 const Home = ({ setPageTitle }) => {
   const navigate = useNavigate();
-
-  const [fromLocation, setFromLocation] = useState(localStorage.getItem("fromCity") || '');
-  const [fromDate, setFromDate] = useState(localStorage.getItem("departureDate") ? new Date(localStorage.getItem("departureDate")) : null);
-  const [toLocation, setToLocation] = useState(localStorage.getItem("toCity") || '');
-  const [toDate, setToDate] = useState(localStorage.getItem("returnDate") ? new Date(localStorage.getItem("returnDate")) : null);
-  const [passengers, setPassengers] = useState(Number(localStorage.getItem('passengers')) || 1);
-  const [isReturnTrip, setIsReturnTrip] = useState(localStorage.getItem("isReturnTrip") === "true");
-
+  const [fromLocation, setFromLocation] = useState('');
+  const [fromDate, setFromDate] = useState(null);
+  const [toLocation, setToLocation] = useState('');
+  const [toDate, setToDate] = useState(null);
+  const [passengers, setPassengers] = useState(() => {
+    return Number(localStorage.getItem('passengers')) || 1;
+  });
+  const [isReturnTrip, setIsReturnTrip] = useState(false);
+  const [validationError, setValidationError] = useState(null);
 
   const handleSearch = () => {
-    // Save selected cities, dates, and passengers to localStorage
-    localStorage.setItem("fromCity", fromLocation);
-    localStorage.setItem("toCity", toLocation);
-    localStorage.setItem("departureDate", fromDate ? fromDate.toISOString().split("T")[0] : "");
-    localStorage.setItem("returnDate", isReturnTrip && toDate ? toDate.toISOString().split("T")[0] : "");
+    console.log('From:', fromLocation, 'Date:', fromDate);
+    console.log('To:', toLocation, 'Date:', toDate);
+    console.log('Passengers:', passengers);
+    console.log('Return Trip:', isReturnTrip);
     localStorage.setItem("passengers", passengers);
-    localStorage.setItem("isReturnTrip", isReturnTrip);
-
-    // Format date for navigation
-    const formattedFromDate = fromDate ? fromDate.toISOString().split("T")[0] : "";
-    if (!isReturnTrip) {
-      navigate(`/jedansmjer?od=${fromLocation}&do=${toLocation}&datum_polaska=${formattedFromDate}&putnici=${passengers}`);
-    } else {
-      const formattedToDate = toDate ? toDate.toISOString().split("T")[0] : "";
-      navigate(`/jedansmjer?od=${fromLocation}&do=${toLocation}&datum_polaska=${formattedFromDate}&datum_povratka=${formattedToDate}&putnici=${passengers}&povratno=${isReturnTrip}`);
+    const valid = fromLocation && toLocation && fromDate && !isReturnTrip || toDate;
+    if (!valid) {
+      setValidationError('Potrebno unijeti sve podatke!');
+      return;
     }
+    const formatiraniDatOd = `${fromDate.getFullYear()}-${String(fromDate.getMonth() + 1).padStart(2, '0')}-${String(fromDate.getDate()).padStart(2, '0')}`;
+
+    if(!isReturnTrip){
+      /*navigate*/
+      location.href=(`/jedansmjer?od=${fromLocation}&do=${toLocation}&datum_polaska=${formatiraniDatOd}&putnici=${passengers}`);
+    }else{
+      const formatiraniDatDO = `${toDate.getFullYear()}-${String(toDate.getMonth() + 1).padStart(2, '0')}-${String(toDate.getDate()).padStart(2, '0')}`;
+      /*navigate*/
+      location.href=(`/jedansmjer?od=${fromLocation}&do=${toLocation}&datum_polaska=${formatiraniDatOd}&datum_povratka=${formatiraniDatDO}&putnici=${passengers}&povratno=${isReturnTrip}`);
+    }
+
   };
+
 
   useEffect(() => setPageTitle(''), []);
 
@@ -39,28 +47,61 @@ const Home = ({ setPageTitle }) => {
     <div className="container">
       <h1>KUPNJA AUTOBUSNIH KARATA</h1>
       <div>
-
-        <label>Od:</label>
-        <input type="text" value={fromLocation} onChange={(e) => setFromLocation(e.target.value)} />
-        <DatePicker selected={fromDate} onChange={(date) => setFromDate(date)} dateFormat="dd/MM/yyyy" placeholderText="Select date" />
+        <label htmlFor="fromLocation">OD:</label>
+        <input
+          type="text"
+          id="fromLocation"
+          value={fromLocation}
+          onChange={(e) => setFromLocation(e.target.value)}
+          required
+        />
+        <DatePicker
+          id={'fromDate'}
+          selected={fromDate}
+          onChange={(date) => setFromDate(date)}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Select date"
+          required
+        />
       </div>
       <div style={{ color: "red" }}>
         { validationError }
       </div>
       <div>
         <label>
-          <input type="checkbox" checked={isReturnTrip} onChange={(e) => setIsReturnTrip(e.target.checked)} />
-          Povratno putovanje
+          <input
+            type="checkbox"
+            checked={isReturnTrip}
+            onChange={(e) => setIsReturnTrip(e.target.checked)}
+          />
+          POVRATNO PUTOVANJE
         </label>
       </div>
       <div>
-        <label>Do:</label>
-        <input type="text" value={toLocation} onChange={(e) => setToLocation(e.target.value)} />
-        <DatePicker selected={toDate} onChange={(date) => setToDate(date)} dateFormat="dd/MM/yyyy" placeholderText="Select date" disabled={!isReturnTrip} />
+        <label htmlFor="toLocation">DO:</label>
+        <input
+          type="text"
+          id="toLocation"
+          value={toLocation}
+          onChange={(e) => setToLocation(e.target.value)}
+        />
+        <DatePicker
+          selected={toDate}
+          onChange={(date) => setToDate(date)}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Select date"
+          disabled={!isReturnTrip}
+        />
       </div>
       <div>
-        <label>Broj putnika:</label>
-        <input type="number" value={passengers} onChange={(e) => setPassengers(Number(e.target.value))} min={1} />
+        <label htmlFor="passengers">BROJ PUTNIKA:</label>
+        <input
+          type="number"
+          id="passengers"
+          value={passengers}
+          onChange={(e) => setPassengers(Number(e.target.value))}
+          min={1}
+        />
       </div>
       <button onClick={handleSearch}>Traži</button>
     </div>
