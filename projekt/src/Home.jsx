@@ -64,9 +64,7 @@ const Home = ({ setPageTitle }) => {
           required
         />
       </div>
-      <div style={{ color: "red" }}>
-        { validationError }
-      </div>
+      
       <div>
         <label>
           <input

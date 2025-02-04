@@ -41,8 +41,6 @@ const Narudzba = ({ setPassengers }) => {
                 ))}</div>
             </div>
             <div className="section">
-                <h3>REZERVACIJA SJEDALA</h3>
-                <button>Odaberi svoje sjedalo</button>
 
                 <h3>Rezervacija sjedala</h3>
                 <button onClick={handlesjedala}>Odaberi svoje sjedalo</button>
