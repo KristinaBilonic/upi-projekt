@@ -81,4 +81,22 @@ router.get('/voznired/:vozniRedID', async (req, res) => {
         res.status(500).json({ error: e.message });
     }
 });
+router.get('/korisnik/:userId', async (req, res) => {
+    try {
+        const tickets = await Karta.find({ korisnik_ID: req.params.userId })
+            .populate('sjedalo_ID', 'red stupac')
+            .populate({
+                path: 'vozni_red_ID',
+                populate: { 
+                    path: 'mjesto_polaska mjesto_dolaska', 
+                    model: 'Grad', 
+                    select: 'naziv' 
+                }
+            })
+            .populate('korisnik_ID', 'ime prezime email');
+        res.json(tickets);
+    } catch (error) {
+        res.status(500).json({ error: "Greška pri dohvaćanju kupljenih karti." });
+    }
+});
 export default router;

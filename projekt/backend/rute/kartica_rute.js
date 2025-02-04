@@ -48,6 +48,17 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ error: e.message });
     }
 });
+router.get('/korisnik/profil/:userId', async (req, res) => {
+    try {
+        const kartice = await Kartica.find({ korisnik_ID: req.params.userId })
+            .populate('korisnik_ID', 'ime prezime email'); // Ensure user data is populated
+        
+        res.json(kartice);
+    } catch (error) {
+        res.status(500).json({ error: "Greška pri dohvaćanju kartica korisnika." });
+    }
+});
+
 
 // Delete a card
 router.delete('/:id', async (req, res) => {

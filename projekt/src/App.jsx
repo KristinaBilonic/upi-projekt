@@ -16,6 +16,8 @@ import Profil from './profil';
 import PovijestKupnji from './povijestKupnji';
 import UnosKartice from './unosKartice';
 import Sjedala from './sjedala';
+import Popis from './popis';
+import UnosKarticeProfil from './unosKarticeProfil';
 
 function App() {
   const pathOnly = location.pathname.includes('?') ? location.pathname : location.pathname.split('?')[0];
@@ -65,10 +67,12 @@ function App() {
             <Route path="/placeno" element={<Placeno />} />
             <Route path="/nijePlaceno" element={<NijePlaceno />} />
             <Route path="/karta" element={<Karta />} />
-            <Route path="/profil" element={<Profil fullName={'Ivo Ivić'} setPageTitle={setPageTitle} />} />
-            <Route path="/povijestKupnji" element={<PovijestKupnji passengers={passengers} setPageTitle={setPageTitle} />} />
+            <Route path="/profil" element={<Profil setPageTitle={setPageTitle} />} />
+            <Route path="/povijestKupnji" element={<PovijestKupnji setPageTitle={setPageTitle} />} />
             <Route path="/sjedala" element={<Sjedala />} />
             <Route path="/unosKartice" element={<UnosKartice />} />
+            <Route path="/popis" element={<Popis />} />
+            <Route path="/unosKarticeProfil" element={<UnosKarticeProfil />} />
           </Routes>
         </Router>
       </main>
