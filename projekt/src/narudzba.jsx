@@ -100,8 +100,6 @@ const Narudzba = ({ setPassengers }) => {
 
             {/* ✅ FIX: SEAT SELECTION BUTTON NOW WORKS PROPERLY ✅ */}
             <div className="section">
-                <h3>REZERVACIJA SJEDALA</h3>
-                <button>Odaberi svoje sjedalo</button>
 
                 <h3>Rezervacija sjedala</h3>
                 <button onClick={handleSeatSelection}>

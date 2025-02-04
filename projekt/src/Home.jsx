@@ -44,9 +44,7 @@ const Home = ({ setPageTitle }) => {
         <input type="text" value={fromLocation} onChange={(e) => setFromLocation(e.target.value)} />
         <DatePicker selected={fromDate} onChange={(date) => setFromDate(date)} dateFormat="dd/MM/yyyy" placeholderText="Select date" />
       </div>
-      <div style={{ color: "red" }}>
-        { validationError }
-      </div>
+      
       <div>
         <label>
           <input type="checkbox" checked={isReturnTrip} onChange={(e) => setIsReturnTrip(e.target.checked)} />
