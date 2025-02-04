@@ -76,12 +76,16 @@ function JedanSmjer() {
   }, [putnici]);  
 
   const handleJedanSmjer = (bus) => {
-    if(!povratno){
+    localStorage.setItem("ticketPrice", bus.cijena); // Store ticket price
+    localStorage.setItem("passengers", putnici);
+    localStorage.setItem("busId", bus._id);
+    if (!povratno) {
       navigate(`/narudzba?od=${gradOd}&do=${gradDo}&datum_polaska=${datumOd}&datum_povratka=${datumDo}&putnici=${putnici}&busId=${bus._id}`);
-    }else{
+    } else {
       navigate(`/povratno?od=${gradDo}&do=${gradOd}&datum_polaska=${datumOd}&putnici=${putnici}&busId=${bus._id}`);
     }
-  };
+    };
+
   return (
     <div className="container">
      

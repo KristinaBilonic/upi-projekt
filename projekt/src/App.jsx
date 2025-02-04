@@ -16,6 +16,7 @@ import Profil from './profil';
 import PovijestKupnji from './povijestKupnji';
 import UnosKartice from './unosKartice';
 import Sjedala from './sjedala';
+// import popis from './popis';
 
 function App() {
   const showBackBtn = !['/', '/signup', , '/home', '/karta', '/placeno', '/nijePlaceno'].includes(location.pathname);
