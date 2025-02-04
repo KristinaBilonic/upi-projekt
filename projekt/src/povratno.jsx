@@ -71,6 +71,10 @@ function Povratno() {
   }, [gradOdId, gradDoId, datumPovratka]);
 
   const handlePovratno = (bus) => {
+    localStorage.setItem("returnTicketPrice", bus.cijena); // Store return ticket price
+    localStorage.setItem("passengers", putnici); // Store passenger count
+    localStorage.setItem("busId", bus._id); // Store bus ID
+
     navigate(`/narudzba?busIdprvi=${busIdprvi}&busIdPovratni=${bus._id}`);
   };
 
