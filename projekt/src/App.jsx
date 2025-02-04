@@ -16,6 +16,7 @@ import Profil from './profil';
 import PovijestKupnji from './povijestKupnji';
 import UnosKartice from './unosKartice';
 import Sjedala from './sjedala';
+// import popis from './popis';
 
 function App() {
   const pathOnly = location.pathname.includes('?') ? location.pathname : location.pathname.split('?')[0];
